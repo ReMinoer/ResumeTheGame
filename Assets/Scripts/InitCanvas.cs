@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using System.Collections;
 
-public class Controls : MonoBehaviour {
+public class InitCanvas : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
-	void Update () {		
+	void Update () {
+	
 	}
 }
