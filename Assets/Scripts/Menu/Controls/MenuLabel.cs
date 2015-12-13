@@ -21,7 +21,7 @@ namespace Menu.Controls
         }
 
         public MenuLabel(IMenu menu)
-            : base(menu, Resources.Load<GameObject>("Label"))
+            : base(menu, Object.Instantiate(Resources.Load("Label")) as GameObject)
         {
             _text = GameObject.GetComponent<Text>();
         }

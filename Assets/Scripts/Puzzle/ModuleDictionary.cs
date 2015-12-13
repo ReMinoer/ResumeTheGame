@@ -66,7 +66,7 @@ namespace Puzzle
                     Type type = modulePair.Key;
                     int probability = modulePair.Value;
 
-                    randomValue += probability;
+                    sum += probability;
 
                     if (sum >= randomValue)
                         return (IPuzzleModule)Activator.CreateInstance(type);

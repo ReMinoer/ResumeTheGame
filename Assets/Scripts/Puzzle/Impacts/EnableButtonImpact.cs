@@ -1,20 +1,20 @@
 ﻿using Menu;
-using Menu.Controls;
 
 namespace Puzzle.Impacts
 {
     public class EnableButtonImpact : IImpact
     {
-        private readonly MenuButton _button;
+        private IMenu _nextMenu;
 
         public void Configure(IMenu nextMenu)
         {
-            _button.Enabled = false;
+            _nextMenu = nextMenu;
+            _nextMenu.Enabled = false;
         }
 
         public void Apply()
         {
-            _button.Enabled = true;
+            _nextMenu.Enabled = true;
         }
     }
 }

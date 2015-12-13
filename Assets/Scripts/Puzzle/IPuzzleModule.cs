@@ -1,5 +1,6 @@
 ﻿using System;
 using Menu;
+using UnityEngine;
 
 namespace Puzzle
 {
@@ -8,6 +9,6 @@ namespace Puzzle
         event Action<IPuzzleModule> Succeed;
         event Action Failed;
         float Time { get; }
-        IMenu GenerateControls(IMenu rootMenu);
+        IMenu GenerateControls(MenuBuilder.MenuRoot menuRoot, GameObject canvas, IMenu currentMenu);
     }
 }

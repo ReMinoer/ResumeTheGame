@@ -45,10 +45,10 @@ namespace Menu.Controls
         }
 
         public MenuButton(IMenu menu)
-            : base(menu, Resources.Load<GameObject>("Label"))
+            : base(menu, Object.Instantiate(Resources.Load("Button")) as GameObject)
         {
             _button = GameObject.GetComponent<Button>();
-            _text = GameObject.GetComponent<Text>();
+            _text = GameObject.GetComponentInChildren<Text>();
         }
     }
 }

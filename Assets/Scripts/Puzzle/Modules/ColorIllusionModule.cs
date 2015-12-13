@@ -23,13 +23,14 @@ namespace Puzzle.Modules
             get { return 15f; }
         }
 
-        public override IMenu GenerateControls(IMenu rootMenu)
+        public override IMenu GenerateControls(MenuBuilder.MenuRoot menuRoot, GameObject canvas, IMenu currentMenu)
         {
-            int answerIndex = Random.Range(0, ChoiceCount - 1);
-            string answerText = Colors.ElementAt(Random.Range(0, Colors.Count - 1)).Key;
-            Color answerColor = Colors.ElementAt(Random.Range(0, Colors.Count - 1)).Value;
+            int answerChoiceIndex = Random.Range(0, ChoiceCount);
+            int answerColorIndex = Random.Range(0, Colors.Count);
+            string answerText = Colors.ElementAt(answerColorIndex).Key;
+            Color answerColor = Colors.ElementAt(answerColorIndex).Value;
 
-            var menu = new SimpleMenu(rootMenu);
+            var menu = new SimpleMenu(menuRoot, canvas, currentMenu);
 
             var label = new MenuLabel(menu)
             {
@@ -40,7 +41,7 @@ namespace Puzzle.Modules
             {
                 var button = new MenuButton(menu);
 
-                if (i == answerIndex)
+                if (i == answerChoiceIndex)
                 {
                     button.Triggered += Success;
                     button.TextColor = answerColor;
@@ -48,12 +49,12 @@ namespace Puzzle.Modules
                 else
                 {
                     button.Triggered += Fail;
-                    int colorIndex = Random.Range(0, Colors.Count - 2);
+                    int colorIndex = Random.Range(0, Colors.Count - 1);
                     button.TextColor = Colors.Values.Where(x => x != answerColor).ElementAt(colorIndex);
                 }
 
-                button.Text = Colors.ElementAt(Random.Range(0, Colors.Count - 1)).Key;
-                button.Color = Colors.ElementAt(Random.Range(0, Colors.Count - 1)).Value;
+                button.Text = Colors.ElementAt(Random.Range(0, Colors.Count)).Key;
+                button.Color = Colors.ElementAt(Random.Range(0, Colors.Count)).Value;
             }
 
             return menu;

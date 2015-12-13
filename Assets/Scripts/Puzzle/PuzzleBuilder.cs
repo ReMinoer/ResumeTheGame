@@ -1,8 +1,9 @@
-﻿using Puzzle.Impacts;
-using UnityEngine;
+﻿using System;
+using Random = UnityEngine.Random;
 
 namespace Puzzle
 {
+    [Serializable]
     public class PuzzleBuilder
     {
         public int ModulesCount;

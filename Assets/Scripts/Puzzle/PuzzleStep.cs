@@ -31,7 +31,7 @@ namespace Puzzle
 
         private void ModuleOnSucceed(IPuzzleModule module)
         {
-            if (!_alreadySucceed)
+            if (_alreadySucceed)
                 return;
 
             _success[module] = true;

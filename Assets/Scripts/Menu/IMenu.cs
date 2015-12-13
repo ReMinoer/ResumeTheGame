@@ -6,7 +6,7 @@ namespace Menu
     public interface IMenu
     {
         bool Enabled { get; set; }
-        GameObject Canvas { get; }
+        GameObject Panel { get; }
         ReadOnlyCollection<IMenuControl> Controls { get; }
         void AddControl(IMenuControl control);
     }
