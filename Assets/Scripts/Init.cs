@@ -14,6 +14,11 @@ public class Init : MonoBehaviour {
 		btn1.navigation = nav;
 		btn1.transition = Selectable.Transition.ColorTint;
 	}
+
+	public void End() {
+		Application.Quit ();
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
