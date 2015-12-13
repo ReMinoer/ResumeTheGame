@@ -49,7 +49,7 @@ namespace Menu
         public void AddControl(IMenuControl control)
         {
             control.GameObject.transform.SetParent(Panel.transform, false);
-            control.GameObject.transform.localPosition = Vector3.down * _anchorCursor;
+            control.GameObject.transform.localPosition += Vector3.down * _anchorCursor;
 
             _anchorCursor += control.GameObject.GetComponent<RectTransform>().rect.height + Margin;
 

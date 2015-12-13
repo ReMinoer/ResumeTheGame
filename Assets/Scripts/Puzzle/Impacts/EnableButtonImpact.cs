@@ -9,12 +9,15 @@ namespace Puzzle.Impacts
         public void Configure(IMenu nextMenu)
         {
             _nextMenu = nextMenu;
-            _nextMenu.Enabled = false;
+
+            if (_nextMenu != null)
+                _nextMenu.Enabled = false;
         }
 
         public void Apply()
         {
-            _nextMenu.Enabled = true;
+            if (_nextMenu != null)
+                _nextMenu.Enabled = true;
         }
     }
 }

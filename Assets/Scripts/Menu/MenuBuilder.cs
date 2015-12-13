@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Menu.Controls;
 using Puzzle;
 using Puzzle.Impacts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace Menu
@@ -20,6 +20,15 @@ namespace Menu
             IPuzzle puzzle = PuzzleBuilder.Build(seed);
 
             var menuRoot = new MenuRoot(canvas);
+            new MenuLabel(menuRoot)
+            {
+                Text = "Resume The Game"
+            };
+            new MenuLabel(menuRoot)
+            {
+                Text = "The Game"
+            };
+
             IMenu currentMenu = menuRoot;
             IImpact currentImpact = null;
 
@@ -37,17 +46,22 @@ namespace Menu
                 currentMenu = newMenu;
             }
 
-            var button = new MenuButton(currentMenu);
-            button.Text = "Resume The Game";
+            var button = new MenuButton(currentMenu)
+            {
+                Text = "Resume The Game"
+            };
+            button.Triggered += () => SceneManager.LoadScene("EndScreen");
 
-            currentImpact = puzzle.Steps.Last().Impact = new WinImpact();
-            currentImpact.Configure(null);
+            if (currentImpact != null)
+                currentImpact.Configure(null);
 
             return menuRoot;
         }
 
         public class MenuRoot : IMenu
         {
+            private const float Margin = 10f;
+            private float _anchorCursor = Margin;
             public bool Enabled { get; set; }
             public GameObject Panel { get; private set; }
             public ReadOnlyCollection<IMenuControl> Controls { get; private set; }
@@ -75,6 +89,10 @@ namespace Menu
             public void AddControl(IMenuControl control)
             {
                 control.GameObject.transform.SetParent(Panel.transform, false);
+                control.GameObject.transform.localPosition += Vector3.down * _anchorCursor;
+
+                _anchorCursor += control.GameObject.GetComponent<RectTransform>().rect.height + Margin;
+
                 _controls.Add(control);
             }
 
